@@ -3,16 +3,19 @@ package com.example.mark_i5.webservicestest;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.view.LayoutInflater;
-import android.util.Log;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
+import com.example.mark_i5.webservicestest.data.Track;
 import com.example.mark_i5.webservicestest.tasks.LastFMWebApi;
 
 
@@ -25,6 +28,7 @@ public class WebServicesActivity extends Activity {
     private WebServicesActivity thisActivity;
     private static String LOGTAG = "WebServicesActivity";
     private InputMethodManager inMgr;
+    private ArrayList<Track> tracks;
 
 
 
@@ -81,4 +85,15 @@ public class WebServicesActivity extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
+
+
+    public void setTracks(ArrayList<Track> tracks){
+        this.tracks = tracks;
+
+
+
+    }
+
 }

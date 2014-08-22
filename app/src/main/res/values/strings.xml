@@ -9,5 +9,6 @@
     <string name="country_text">Country</string>
     <string name="city">City</string>
     <string name="search">Search</string>
+    <string name="title_activity_list_tracks">ListTracks</string>
 
 </resources>

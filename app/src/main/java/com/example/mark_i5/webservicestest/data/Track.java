@@ -1,9 +1,11 @@
 package com.example.mark_i5.webservicestest.data;
 
+import java.io.Serializable;
+
 /**
  * Created by mark-i5 on 20/08/2014.
  */
-public class Track {
+public class Track implements Serializable {
 
 
     private String name;
