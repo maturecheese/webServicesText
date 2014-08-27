@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.mark_i5.webservicestest.R;
 import com.example.mark_i5.webservicestest.data.Track;
@@ -14,6 +17,7 @@ public class ListTracksActivity extends Activity {
 
     private ArrayList<Track> tracks;
     public void setTracks(ArrayList<Track> tracks) {
+
         this.tracks = tracks;
     }
 
@@ -43,5 +47,12 @@ public class ListTracksActivity extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public static class MyViewHolder{
+        public TextView artistName, trackName;
+        public ImageView icon;
+        public Button trackButton;
+        public Track track;
     }
 }

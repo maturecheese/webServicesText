@@ -2,7 +2,10 @@ package com.example.mark_i5.webservicestest;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -15,11 +18,15 @@ import android.widget.EditText;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import com.example.mark_i5.webservicestest.childActivities.ListTracksActivity;
 import com.example.mark_i5.webservicestest.data.Track;
 import com.example.mark_i5.webservicestest.tasks.LastFMWebApi;
 
 
 public class WebServicesActivity extends Activity {
+    public static final  String PREFS_NAME = "myPrefsFile";
+    public static final String COUNTRY = "country";
+    public static final String METRO = "metro";
 
     private EditText country_field;
     private EditText city_field;
@@ -40,20 +47,36 @@ public class WebServicesActivity extends Activity {
         this.country_field = (EditText) findViewById(R.id.country_edit);
         this.city_field = (EditText)findViewById(R.id.city_edit);
         this.search_button = (Button) findViewById(R.id.button_search);
-        this.layoutInflater = getLayoutInflater().from(this);
+        this.layoutInflater = this.getLayoutInflater();
         this.thisActivity = this;
+
+
+
 
         this.search_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 try {
+
+
+
                     String[] params = new String[2];
 
                     params[0] = city_field.getText().toString();
                     params[1] = country_field.getText().toString();
+
+                    SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                    SharedPreferences.Editor editor = sp.edit();
+                    editor.putString(METRO, params[0]);
+                    editor.putString(COUNTRY, params[1]);
+                    editor.commit();
+
+
                     inMgr.hideSoftInputFromInputMethod(search_button.getWindowToken(),0);
-                    LastFMWebApi apiTask = new LastFMWebApi(WebServicesActivity.this);
+                    //Intent intent = new Intent(thisActivity, ListTracksActivity.class);
+
+                    LastFMWebApi apiTask = new LastFMWebApi(thisActivity);
                     apiTask.execute(params);
                 } catch (Exception e) {
 
@@ -88,12 +111,5 @@ public class WebServicesActivity extends Activity {
 
 
 
-
-    public void setTracks(ArrayList<Track> tracks){
-        this.tracks = tracks;
-
-
-
-    }
 
 }
